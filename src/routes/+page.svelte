@@ -4,7 +4,8 @@
     import { Trainstop } from '$lib/trainstop';
 
         let trainRoute: Train[] = [];
-        let stopData: Stop[] = [];
+        let stopData: Trainstop[] = [];
+        
 
         onMount(async () => {
     try {
@@ -75,7 +76,7 @@
   {:else}
     <p>No stop data available</p>
   {/if} 
-  
+
 </main>
 
         <style>
