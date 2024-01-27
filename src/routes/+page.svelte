@@ -76,7 +76,7 @@
           }
   
           // Fetch train direction data
-          const directionResponse = await fetch('https://ptvapiwrapper.azurewebsites.net/trains/get-directions', {
+          const directionResponse = await fetch( 'https://ptvapiwrapper.azurewebsites.net/trains/get-directions', {
             method: 'GET',
             headers: {
               'accept': 'application/json',
