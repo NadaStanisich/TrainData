@@ -5,7 +5,6 @@
   import { TrainDeparture, Departures } from "$lib/traindeparture";
   import { TrainDirections } from "$lib/traindirections";
 
-
   let selectedStation: Trainstop | null = null;
   let trainRoute: Train[] = [];
   let stopData: Trainstop[] = [];
@@ -86,8 +85,7 @@
           },
         );
 
-        console.log("sadfsdaf")
-        
+        console.log("sadfsdaf");
 
         if (departureResponse.ok) {
           const departureDataResponse = await departureResponse.json();
@@ -158,7 +156,6 @@
       fetchNextTrains();
       //fetchData();
     }
-    
   }
 
   async function fetchNextTrains() {
@@ -179,7 +176,7 @@
 
         if (departuresResponse.ok) {
           departuresData = await departuresResponse.json();
-          console.log("DeparturesData: ", departuresData)
+          console.log("DeparturesData: ", departuresData);
           // departureData = departuresData.map(
           //   (departure: any) =>
           //     new TrainDeparture(
@@ -215,6 +212,7 @@
   </select>
 
   {#if departuresData != undefined}
+
   {#if departuresData.departures != undefined }
     <h1>Next Trains</h1> {new Date().toUTCString()}
     
@@ -261,38 +259,6 @@
       <p>No stop data available</p>
     {/if}
 
-      <h1 class="text-3xl font-bold my-4">Train Departures</h1>
-
-      {#if departureData.length > 0}
-        {#each departureData as departure (departure.stop_id)}
-          <div>
-            <p>
-              Stop ID: {departure.stop_id} Route ID: {departure.route_id} Run ID:
-              {departure.run_id} Direction ID: {departure.direction_id} Scheduled
-              Departure: {departure.scheduled_departure_utc} Estimated Departure:
-              {departure.estimated_departure_utc} Platform Number: {departure.platform_number}
-            </p>
-          </div>
-        {/each}
-      {:else}
-        <p>No departure data available</p>
-      {/if}
-
-      <h1 class="text-3xl font-bold my-4">Train Directions</h1>
-
-      {#if directionData.length > 0}
-        {#each directionData as direction (direction.direction_id)}
-          <div>
-            <p>
-              Direction ID: {direction.direction_id} Route Direction Description:
-              {direction.route_direction_description} Direction Name: {direction.direction_name}
-              Route ID: {direction.route_id} Route Type: {direction.route_type}
-            </p>
-          </div>
-        {/each}
-      {:else}
-        <p>No direction data available</p>
-      {/if}
     </div>
   {/if}
 </main>
