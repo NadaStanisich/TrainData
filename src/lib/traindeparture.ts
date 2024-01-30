@@ -1,3 +1,7 @@
+class Departures {
+    departures: [TrainDeparture] | undefined
+}
+
 class TrainDeparture {
     stop_id: number;
     route_id: number;
@@ -20,4 +24,4 @@ class TrainDeparture {
     }
 }
 
-export { TrainDeparture };
+export { TrainDeparture, Departures };
