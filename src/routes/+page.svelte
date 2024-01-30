@@ -214,10 +214,12 @@
   {#if departuresData != undefined}
 
   {#if departuresData.departures != undefined }
-    <h1>Next Trains</h1> {new Date().toUTCString()}
+    <h1>Next Trains</h1> {new Date().toLocaleString()}
     
-    {#each departuresData.departures.slice(27, 32) as departure}
-      <p>{departure.platform_number} {departure.scheduled_departure_utc}</p>
+    {#each departuresData.departures
+      .filter(departure => new Date(departure.scheduled_departure_utc) > new Date())
+      .slice(0, 5) as departure}
+      <p>{departure.platform_number} {new Date(departure.scheduled_departure_utc).toLocaleString()}</p>
     {/each}
 
   {/if}
