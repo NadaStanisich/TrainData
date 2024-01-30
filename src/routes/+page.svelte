@@ -212,11 +212,16 @@
   </select>
 
   {#if departuresData != undefined}
-    {#if departuresData.departures != undefined}
-      <h1>Next Train</h1>
-      {departuresData.departures[0].scheduled_departure_utc}
-    {/if}
+
+  {#if departuresData.departures != undefined }
+    <h1>Next Trains</h1> {new Date().toUTCString()}
+    
+    {#each departuresData.departures.slice(27, 32) as departure}
+      <p>{departure.platform_number} {departure.scheduled_departure_utc}</p>
+    {/each}
+
   {/if}
+{/if}
 
   {#if selectedStation}
     <h2 class="text-xl font-bold mb-2">Selected Station</h2>
@@ -242,17 +247,17 @@
       <h1 class="text-3xl font-bold my-4">Train Stops</h1>
 
       {#if stopData.length > 0}
-        {#each stopData as stop (stop.stop_id)}
-          <div>
-            <p>
-              Stop Name: {stop.stop_name} Stop Suburb: {stop.stop_suburb} Route Type:
-              {stop.route_type} Latitude: {stop.stop_latitude} Longitude: {stop.stop_longitude}
-            </p>
-          </div>
-        {/each}
-      {:else}
-        <p>No stop data available</p>
-      {/if}
+      {#each stopData.slice(0, 4) as stop (stop.stop_id)}
+        <div>
+          <p>
+            Stop Name: {stop.stop_name} Stop Suburb: {stop.stop_suburb} Route Type:
+            {stop.route_type} Latitude: {stop.stop_latitude} Longitude: {stop.stop_longitude}
+          </p>
+        </div>
+      {/each}
+    {:else}
+      <p>No stop data available</p>
+    {/if}
 
     </div>
   {/if}
