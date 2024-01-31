@@ -200,6 +200,17 @@
       console.error(error);
     }
   }
+
+  function departureTimeWithMinutesLeft(departureTime) {
+    const scheduledTime: Date = new Date(departureTime);
+    const currentTime: Date = new Date();
+
+     // Calculate the difference in milliseconds
+    const diffInMilliseconds: number = Number(scheduledTime - currentTime);
+    const diffInMinutes = Math.ceil(diffInMilliseconds / (1000 * 60)); // Convert milliseconds to minutes
+
+    return `${scheduledTime.toLocaleString()} - ${diffInMinutes} minutes left`;
+  }
 </script>
 
 <main>
@@ -211,6 +222,7 @@
     {/each}
   </select>
 
+
   {#if departuresData != undefined}
 
   {#if departuresData.departures != undefined }
@@ -219,7 +231,9 @@
     {#each departuresData.departures
       .filter(departure => new Date(departure.scheduled_departure_utc) > new Date())
       .slice(0, 5) as departure}
-      <p>{departure.platform_number} {new Date(departure.scheduled_departure_utc).toLocaleString()}</p>
+
+      <p>Platform # {departure.platform_number} -  {departureTimeWithMinutesLeft(departure.scheduled_departure_utc).toLocaleString()}</p>
+
     {/each}
 
   {/if}
