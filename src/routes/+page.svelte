@@ -231,7 +231,9 @@
     {#each departuresData.departures
       .filter(departure => new Date(departure.scheduled_departure_utc) > new Date())
       .slice(0, 5) as departure}
+
       <p>Platform # {departure.platform_number} -  {departureTimeWithMinutesLeft(departure.scheduled_departure_utc).toLocaleString()}</p>
+
     {/each}
 
   {/if}
